@@ -26,10 +26,12 @@ def func(x, result):
     sum = 0
     n = 0
     term = 1
+    factor = 1
     while abs(term) > epsilon:
         sum += term
         n += 1
-        term = (-1)**n * x**(2 * n) / math.factorial(n)
+        factor *= n
+        term = (-1)**n * x**(2 * n) / factor
     result.append(sum)
     barrier.wait()
 

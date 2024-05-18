@@ -14,8 +14,13 @@ result_p_omk = []
 
 
 def P_0(p, N, l):
-    sum_series = sum([(p**k) / math.factorial(k) for k in range(N+1)])
-    extra_term = ((p**(N+1)) / (N * math.factorial(N))) * \
+    factorial = 1
+    sum_series = 0
+    for k in range(N+1):
+        if k > 0:
+            factorial *= k
+        sum_series += (p**k) / factorial
+    extra_term = ((p**(N+1)) / (N * factorial)) * \
         ((1 - (p/N)**l) / (1 - p/N))
     result_p_0.append((sum_series + extra_term)**(-1))
     barrier.wait()
