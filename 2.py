@@ -22,9 +22,11 @@ from functools import lru_cache
 epsilon = 1e-7
 barrier = Barrier(3)
 
+
 @lru_cache(maxsize=None)
 def power(x, n):
     return x**n
+
 
 def func(x, result):
     sum = 0
@@ -44,7 +46,8 @@ def func2(x, result):
     sum = 0
     n = 1
     while True:
-        term = 1 / (2 * n - 1) * power(((x - 1) / (x + 1)), (2 * n - 1)) #((x - 1) / (x + 1))**(2 * n - 1)
+        term = 1 / (2 * n - 1) * power(((x - 1) / (x + 1)),
+                                       (2 * n - 1))  # ((x - 1) / (x + 1))**(2 * n - 1)
         if abs(term) < epsilon:
             break
         else:
