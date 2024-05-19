@@ -11,16 +11,18 @@ from threading import Thread, Barrier
 barrier = Barrier(2)
 result_p_0 = []
 result_p_omk = []
-powers = {}
 
 
 def P_0(p, N, l):
+    factor = 1
     sum_series = 0
+    p_powk = 1
     for k in range(N+1):
-        if k not in powers:
-            powers[k] = p**k
-        sum_series += powers[k] / math.factorial(k)
-    extra_term = (powers.get(N+1, p**(N+1)) / (N * math.factorial(N))) * \
+        if k > 0:
+            factor *= k
+        sum_series += p_powk / factor
+        p_powk *= p
+    extra_term = ((p_powk) / (N * factor)) * \
         ((1 - (p/N)**l) / (1 - p/N))
     result_p_0.append((sum_series + extra_term)**(-1))
     barrier.wait()
@@ -28,9 +30,8 @@ def P_0(p, N, l):
 
 def P_omk(p, N, l):
     barrier.wait()
-    factor = math.factorial(N)
     result_p_omk.append(
-        (powers.get(l, (p/N)**l) * powers[N] / factor) * result_p_0[0])
+        ((p/N)**l) * ((p**N) / math.factorial(N)) * result_p_0[0])
 
 
 def main():
