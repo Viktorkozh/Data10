@@ -16,13 +16,13 @@ result_p_omk = []
 def P_0(p, N, l):
     factor = 1
     sum_series = 0
-    p_powk = 1
+    x_pow_k = 1
     for k in range(N+1):
         if k > 0:
             factor *= k
-        sum_series += p_powk / factor
-        p_powk *= p
-    extra_term = ((p_powk) / (N * factor)) * \
+        sum_series += x_pow_k / factor
+        x_pow_k *= p
+    extra_term = ((x_pow_k) / (N * factor)) * \
         ((1 - (p/N)**l) / (1 - p/N))
     result_p_0.append((sum_series + extra_term)**(-1))
     barrier.wait()

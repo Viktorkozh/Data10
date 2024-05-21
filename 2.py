@@ -27,13 +27,13 @@ def func(x, result):
     n = 0
     term = 1
     factor = 1
-    x_pown = 1
+    x_pow_n = 1
     while abs(term) > epsilon:
         sum += term
         n += 1
         factor *= n
-        x_pown *= x**2
-        term = (-1)**n * x_pown / factor
+        x_pow_n *= x**2
+        term = (-1)**n * x_pow_n / factor
     result.append(sum)
     barrier.wait()
 
@@ -41,16 +41,16 @@ def func(x, result):
 def func2(x, result):
     sum = 0
     n = 1
-    x_pown_minus_1 = (x - 1) / (x + 1)
-    term = x_pown_minus_1
+    x_pow_n_minus_1 = (x - 1) / (x + 1)
+    term = x_pow_n_minus_1
     while True:
-        term = x_pown_minus_1 / (2 * n - 1)
+        term = x_pow_n_minus_1 / (2 * n - 1)
         if abs(term) < epsilon:
             break
         else:
             sum += term
             n += 1
-            x_pown_minus_1 *= (x - 1)**2 / (x + 1)**2
+            x_pow_n_minus_1 *= (x - 1)**2 / (x + 1)**2
     result.append(sum)
     barrier.wait()
 
